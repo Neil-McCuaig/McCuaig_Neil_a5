@@ -37,6 +37,13 @@ public class Player : MonoBehaviour
         { 
             _turnDirection = 0.0f; 
         }
+
+        //This makes you shoot once per click, or at least it should.
+        //This being in fixed update makes it fire strangely
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(0))
+        {
+            Fire();
+        }
     }
 
     private void FixedUpdate()
@@ -49,11 +56,6 @@ public class Player : MonoBehaviour
         if (_turnDirection != 0.0)
         {
             _rigidbody.AddTorque(_turnDirection * this.turnSpeed);
-        }
-        //This makes you shoot once
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(0))
-        {
-            Fire();
         }
     }
 
