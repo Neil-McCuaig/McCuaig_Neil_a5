@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
 
         //This makes you shoot once per click, or at least it should.
         //This being in fixed update makes it fire strangely
+        //The Input.GetMouseButton makes it fire way too fast with a touchpad.
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(0))
         {
             Fire();
