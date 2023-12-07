@@ -30,12 +30,14 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             _turnDirection = 1.0f;
-        } else if (Input.GetKey(KeyCode.D)  || Input.GetKey(KeyCode.RightArrow)) 
-        { 
-            _turnDirection = -1.0f; 
-        } else 
-        { 
-            _turnDirection = 0.0f; 
+        }
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            _turnDirection = -1.0f;
+        }
+        else
+        {
+            _turnDirection = 0.0f;
         }
 
         //This makes you shoot once per click, or at least it should.
@@ -65,5 +67,19 @@ public class Player : MonoBehaviour
         //The latter two "this" and the bullet.project make it spawn where the player is facing
         Bullet bullet = Instantiate(this.bulletPrefab, this.transform.position, this.transform.rotation);
         bullet.Project(this.transform.up);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Asteroid")
+        {
+            _rigidbody.velocity = Vector3.zero;
+            _rigidbody.angularVelocity = 0.0f;
+
+            //Turns off everything to do with the player
+            this.gameObject.SetActive(false);
+
+            FindObjectOfType<Game_Manager>().PlayerDied();
+        }
     }
 }
