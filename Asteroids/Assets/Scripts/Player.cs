@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Bullet bulletPrefab;
+
 
     public float thrustSpeed = 1.0f;
     public float turnSpeed = 1.0f;
@@ -48,5 +50,17 @@ public class Player : MonoBehaviour
         {
             _rigidbody.AddTorque(_turnDirection * this.turnSpeed);
         }
+        //This makes you shoot once
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(0))
+        {
+            Fire();
+        }
+    }
+
+    private void Fire()
+    {
+        //The latter two "this" and the bullet.project make it spawn where the player is facing
+        Bullet bullet = Instantiate(this.bulletPrefab, this.transform.position, this.transform.rotation);
+        bullet.Project(this.transform.up);
     }
 }
