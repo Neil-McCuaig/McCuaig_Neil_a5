@@ -24,7 +24,8 @@ public class Game_Manager : MonoBehaviour
         if (asteroid.size < 0.75f)
         {
             score += 100;
-        }else if (asteroid.size < 1.25f)
+        }
+        else if (asteroid.size < 1.25f)
         {
             score += 50;
         }
